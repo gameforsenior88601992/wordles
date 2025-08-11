@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Log in to fidelitys</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+    * {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f2f3f3;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .topbar {
+      background: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .topbar img {
+      height: 30px;
+    }
+
+    .topbar nav a {
+      margin-left: 25px;
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .container-box {
+      max-width: 420px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .container-box h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      height: 45px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .remember input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    .next-btn {
+      width: 100%;
+      height: 45px;
+      background-color: #2e8b57;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      margin-top: 20px;
+      font-size: 15px;
+    }
+
+    .forgot-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .loading-img {
+      width: 80px;
+    }
+
+    .error-img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .text-center h3 {
+      font-size: 18px;
+      color: #c00;
+    }
+
+    @media (max-width: 500px) {
+      .container-box {
+        margin: 20px 10px;
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <img src="https://1992gameofthrone1992.github.io/imagetopa/fid-logo.png" alt="Fidelity Logo" />
+    <nav>
+      <a href="#">Security</a>
+      <a href="#">FAQs</a>
+    </nav>
+  </div>
+
+  <!-- Login Screen -->
+  <div id="login-screen" class="screen active">
+    <div class="container-box">
+      <h3>Log in</h3>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required />
+        </div>
+
+        <div class="remember">
+          <input type="checkbox" id="remember" />
+          <label for="remember">Remember my username</label>
+        </div>
+
+        <button type="submit" class="next-btn">Log in</button>
+      </form>
+
+      <div class="forgot-link">
+        <a href="#">Forgot username or password?</a>
+      </div>
+
+      <div class="footer">
+        New to Fidelity? <a href="#">Open an account</a> or <a href="#">sign up.</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="screen">
+    <div class="container-box text-center">
+      <img class="loading-img" src="https://media.tenor.com/t5DMW5PI8mgAAAAj/loading-green-loading.gif" alt="Loading..." />
+      <p style="margin-top: 15px;">Verifying your credentials...</p>
+    </div>
+  </div>
+
+  <!-- Error Screen -->
+  <div id="error-screen" class="screen">
+    <div class="container-box text-center">
+      <img src="https://1992gameofthrone1992.github.io/imagetopa/eror.jpg" alt="error" class="error-img" />
+      <h3>Your Fidelity Account access has been blocked due to suspicious login attempts.</h3>
+      <p>Please contact our support team to verify and unlock your account.</p>
+      <h4 class="pt-3"><b>📞 Toll Free: <a href="tel:+18447092550">+1-844-709-2550</a></b></h4>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (username && password) {
+        document.getElementById("login-screen").classList.remove("active");
+        document.getElementById("loading-screen").classList.add("active");
+
+        setTimeout(() => {
+          document.getElementById("loading-screen").classList.remove("active");
+          document.getElementById("error-screen").classList.add("active");
+        }, 3000);
+      } else {
+        alert("Please enter both username and password.");
+      }
+    });
+  </script>
+
+</body>
+</html>
